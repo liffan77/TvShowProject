@@ -18,6 +18,7 @@ namespace tvShowProject
     {
         public Startup(IConfiguration configuration)
         {
+            // håll tummarna
             Configuration = configuration;
         }
 
