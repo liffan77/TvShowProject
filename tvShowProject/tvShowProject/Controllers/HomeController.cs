@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using tvShowProject.Models.Entities;
+using Newtonsoft.Json;
 
 namespace tvShowProject.Controllers
 {
@@ -111,9 +112,12 @@ namespace tvShowProject.Controllers
                 return View(model);
             }
             #endregion
-            // lägg till i DB
+
+            #region Lägg till i DB
             var userId = await _userManager.GetUserIdAsync(user);
             await _tvContext.AddUser(userId);
+            #endregion
+            
             #region Logga in och skicka användaren vidare
             await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
             return RedirectToAction(nameof(UserPage));
@@ -123,6 +127,17 @@ namespace tvShowProject.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Search(UserPageVM userPageVm)
+        {
+            ApiHandler apiHandler = new ApiHandler();
+
+            string responseString = apiHandler.GetShowMetaData(userPageVm.SearchString);
+            //deserializera jsonsträngen till en SearchResultVM
+            SearchResultVM searchResultVm = JsonConvert.DeserializeObject<SearchResultVM>(responseString);
+            return PartialView(searchResultVm);
         }
     }
 }

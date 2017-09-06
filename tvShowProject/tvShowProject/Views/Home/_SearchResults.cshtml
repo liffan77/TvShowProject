@@ -1,0 +1,10 @@
+﻿@using tvShowProject.Models.VM
+@model SearchResultVM
+
+<ul>
+    @foreach (var show in Model.Shows)
+    {
+        <li>@show.Title</li>
+    }
+</ul>
+
