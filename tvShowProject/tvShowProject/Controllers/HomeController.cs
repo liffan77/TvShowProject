@@ -136,8 +136,22 @@ namespace tvShowProject.Controllers
 
             string responseString = apiHandler.GetShowMetaData(userPageVm.SearchString);
             //deserializera jsonsträngen till en SearchResultVM
-            SearchResultVM searchResultVm = JsonConvert.DeserializeObject<SearchResultVM>(responseString);
-            return PartialView(searchResultVm);
+            Show show = JsonConvert.DeserializeObject<Show>(responseString);
+            //return PartialView(show);
+            return View(show);
         }
+
+        #region Testar med partiell vy
+        public IActionResult GetPartialSearchResult(UserPageVM userPageVm)
+        {
+            ApiHandler apiHandler = new ApiHandler();
+
+            string responseString = apiHandler.GetShowMetaData(userPageVm.SearchString);
+            //deserializera jsonsträngen till en SearchResultVM
+            Show show = JsonConvert.DeserializeObject<Show>(responseString);
+            //return PartialView(show);
+            return PartialView("_SearchResults", show);
+        }
+        #endregion
     }
 }

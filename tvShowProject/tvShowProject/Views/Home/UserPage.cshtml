@@ -6,8 +6,8 @@
 
 <h1>Welcome @Model.Username</h1>
 <p>this is the user page, where the TV-show form will be displayed</p>
-<form asp-controller="Home" asp-action="Search">
-    <input asp-for="SearchResultVM" />
+<form asp-controller="Home" asp-action="Search" >
+    <input asp-for="SearchString" />
     <input type="submit" value="Search" />
 </form>
 <table>
