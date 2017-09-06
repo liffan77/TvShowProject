@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using tvShowProject.Models.Entities;
 
 namespace tvShowProject.Controllers
 {
@@ -18,12 +19,14 @@ namespace tvShowProject.Controllers
         UserManager<IdentityUser> _userManager;
         SignInManager<IdentityUser> _signInManager;
         IdentityDbContext _identityContext;
+        TvContext _tvContext;
 
-        public HomeController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IdentityDbContext identityContext)
+        public HomeController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IdentityDbContext identityContext, TvContext tvContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _identityContext = identityContext;
+            _tvContext = tvContext;
         }
 
         public IActionResult Index()
@@ -101,18 +104,20 @@ namespace tvShowProject.Controllers
 
             #region Skapa användaren
             await _identityContext.Database.EnsureCreatedAsync();
-
-            var result = await _userManager.CreateAsync(new IdentityUser(model.Username), model.Password);
+            IdentityUser user = new IdentityUser(model.Username);
+            var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
                 ModelState.AddModelError("Username", result.Errors.First().Description);
                 return View(model);
             }
             #endregion
-
+            // lägg till i DB
+            var userId = await _userManager.GetUserIdAsync(user);
+            await _tvContext.AddUser(userId);
             #region Logga in och skicka användaren vidare
             await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
-            return RedirectToAction(nameof(LogIn));
+            return RedirectToAction(nameof(UserPage));
             #endregion
         }
         public IActionResult LogOut(UserPageVM userPageVM)

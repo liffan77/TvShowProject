@@ -14,7 +14,7 @@ namespace tvShowProject.Models.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer(@"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = ProjTest; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False");
             }
         }
@@ -26,7 +26,7 @@ namespace tvShowProject.Models.Entities
                 entity.ToTable("TvTable", "tv");
 
                 entity.HasIndex(e => e.ImdbId)
-                    .HasName("UQ__TvTable__21608C188BF0E4B3")
+                    .HasName("UQ__TvTable__21608C1854EDC7C9")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -45,12 +45,15 @@ namespace tvShowProject.Models.Entities
             {
                 entity.ToTable("User", "tv");
 
+                entity.HasIndex(e => e.AspNetUserId)
+                    .HasName("UQ__User__F42021464F00CC48")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.AspNetUserId)
                     .IsRequired()
-                    .HasColumnName("AspNetUserID")
-                    .HasMaxLength(450);
+                    .HasColumnName("AspNetUserID");
             });
 
             modelBuilder.Entity<UserToTvTable>(entity =>
@@ -67,13 +70,13 @@ namespace tvShowProject.Models.Entities
                     .WithMany(p => p.UserToTvTable)
                     .HasForeignKey(d => d.TvTableId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__UserToTvT__TvTab__4222D4EF");
+                    .HasConstraintName("FK__UserToTvT__TvTab__3D5E1FD2");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserToTvTable)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__UserToTvT__UserI__412EB0B6");
+                    .HasConstraintName("FK__UserToTvT__UserI__3C69FB99");
             });
         }
     }

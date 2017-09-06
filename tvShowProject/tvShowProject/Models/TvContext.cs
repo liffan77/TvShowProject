@@ -13,5 +13,12 @@ namespace tvShowProject.Models.Entities
         {
             
         }
+        
+        public async Task AddUser(string aspNetUserId)
+        {
+            // lägg till i DB
+            User.Add(new Entities.User { AspNetUserId = aspNetUserId });
+            await SaveChangesAsync();
+        }
     }
 }
