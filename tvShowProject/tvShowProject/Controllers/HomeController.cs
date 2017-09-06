@@ -52,7 +52,7 @@ namespace tvShowProject.Controllers
         public IActionResult UserPage()
         {
             UserPageVM userPageVM = new UserPageVM();
-            userPageVM.Username = HttpContext.Session.GetString("Username");
+            userPageVM.Username = User.Identity.Name;
             return View(userPageVM);
         }
 
@@ -83,7 +83,6 @@ namespace tvShowProject.Controllers
 
             if (string.IsNullOrWhiteSpace(loginVM.ReturnUrl))
             {
-                HttpContext.Session.SetString("Username", userPageVM.Username);
                 return RedirectToAction(nameof(UserPage));
             }
             else
@@ -120,10 +119,10 @@ namespace tvShowProject.Controllers
             return RedirectToAction(nameof(UserPage));
             #endregion
         }
-        public IActionResult LogOut()
+        public async Task<IActionResult> LogOut()
         {
-            
-            return View();
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
