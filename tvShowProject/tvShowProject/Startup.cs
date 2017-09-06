@@ -38,7 +38,7 @@ namespace tvShowProject
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.ConfigureApplicationCookie(o => o.LoginPath = "/Home/LogIn");
+            services.ConfigureApplicationCookie(o => o.LoginPath = "/Accounts/LogIn");
             services.AddMvc();
             services.AddMemoryCache();
         }

@@ -1,7 +1,7 @@
 ﻿@model tvShowProject.Models.VM.AccountLoginVM
 
 <h2>LogIn-form</h2>
-<form asp-controller="Home" asp-action="LogIn" asp-route-returnUrl="@Model.ReturnUrl">
+<form asp-controller="Accounts" asp-action="LogIn" asp-route-returnUrl="@Model.ReturnUrl">
     <label asp-for="Username"></label>
     <input asp-for="Username" />
     <span asp-validation-for="Username"></span>
