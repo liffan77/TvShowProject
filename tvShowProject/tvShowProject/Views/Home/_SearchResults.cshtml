@@ -1,10 +1,7 @@
-﻿@using tvShowProject.Models.VM
-@model SearchResultVM
+﻿@*@using tvShowProject.Models.VM.SearchResultVM*@
+@model tvShowProject.Show
 
 <ul>
-    @foreach (var show in Model.Shows)
-    {
-        <li>@show.Title</li>
-    }
+    <li>@Model.Title</li>
 </ul>
 
