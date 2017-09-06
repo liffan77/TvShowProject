@@ -6,3 +6,20 @@
 
 <h1>Welcome @Model.Username</h1>
 <p>this is the user page, where the TV-show form will be displayed</p>
+<table>
+    <thead>
+        <tr>
+            <th><h6>Title</h6></th>
+            <th><h6>Latest Episode</h6></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in User)
+        {
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        }
+    </tbody>
+</table>

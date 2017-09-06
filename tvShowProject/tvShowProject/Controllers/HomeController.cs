@@ -115,9 +115,10 @@ namespace tvShowProject.Controllers
             return RedirectToAction(nameof(LogIn));
             #endregion
         }
-        public IActionResult LogOut()
+        public IActionResult LogOut(UserPageVM userPageVM)
         {
-            
+            HttpContext.Session.Clear();
+            HttpContext.Session.Remove(userPageVM.Username);
             return View();
         }
     }
