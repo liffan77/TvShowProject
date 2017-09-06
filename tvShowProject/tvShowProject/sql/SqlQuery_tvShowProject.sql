@@ -1,9 +1,11 @@
-﻿create schema
+﻿use ProjTest
+go
+create schema
 	tv
 	go
 
-drop table
-	tv.[User]
+--drop table
+--	tv.[User]
 create table
 	tv.TvTable
 	(
@@ -28,6 +30,6 @@ create table
 		TvTableID int references tv.TvTable(ID),
 		PRIMARY KEY (UserID, TvTableID)
 	)
-insert into
-	tv.[user](AspNetUserID)
-	select Id from dbo.aspnetusers
+--insert into
+--	tv.[user](AspNetUserID)
+--	select Id from dbo.aspnetusers
