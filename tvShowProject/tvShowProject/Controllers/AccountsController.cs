@@ -70,7 +70,7 @@ namespace tvShowProject.Controllers
 
             if (string.IsNullOrWhiteSpace(loginVM.ReturnUrl))
             {
-                return RedirectToAction(nameof(UserPage));
+                return Redirect("Shows/UserPage");
             }
             else
                 return Redirect(loginVM.ReturnUrl);
@@ -108,7 +108,11 @@ namespace tvShowProject.Controllers
 
             #region Logga in och skicka användaren vidare
             await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
-            return RedirectToAction(nameof(UserPage));
+            //return RedirectT
+            //return RedirectToAction(nameof(UserPage));
+            //return Redirect("/Shows/UserPage");
+            return RedirectToAction("UserPage", "Shows");
+
             #endregion
         }
 

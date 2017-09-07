@@ -33,3 +33,25 @@ create table
 --insert into
 --	tv.[user](AspNetUserID)
 --	select Id from dbo.aspnetusers
+
+use ProjTest
+
+select * from dbo.AspNetUsers
+where UserName='Niklas'
+go
+
+delete from dbo.AspNetUsers
+where UserName='Kalle'
+go
+
+select * from tv.[User]
+where ID=1003
+go
+
+delete from tv.[User]
+where ID=1007
+go
+
+insert into tv.TvTable
+	(
+	)
