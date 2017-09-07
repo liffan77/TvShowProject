@@ -18,12 +18,12 @@
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model)
+        @foreach (var item in Model.FollowedShowItems)
         {
         <tr>
-            <td></td>
-            <td></td>
+            <td>@item.Title</td>
+            <td>@item.ImdbId</td>
         </tr>
-        }*@
+        }
     </tbody>
 </table>

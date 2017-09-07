@@ -70,7 +70,7 @@ namespace tvShowProject.Controllers
 
             if (string.IsNullOrWhiteSpace(loginVM.ReturnUrl))
             {
-                return Redirect("Shows/UserPage");
+                return Redirect("~/Shows/UserPage");
             }
             else
                 return Redirect(loginVM.ReturnUrl);
