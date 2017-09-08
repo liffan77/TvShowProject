@@ -1,9 +1,16 @@
 ﻿@using tvShowProject.Models.VM
 @model SearchResultVM[]
 
-<ul>
+<table>
     @foreach (var result in Model)
     {
-        <li>@result.Show.Title</li>
+        <tr>
+            <td>@result.Show.Title</td>
+            <td>
+                <form asp-controller="Shows" asp-action="Follow" asp-route-id="@result.Show.ExternalIds.Imdb" asp-route-title="@result.Show.Title">
+                    <input type="submit" value="Follow" />
+                </form>
+            </td>
+        </tr>
     }
-</ul>
+</table>

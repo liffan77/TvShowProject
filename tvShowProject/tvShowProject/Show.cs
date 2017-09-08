@@ -34,6 +34,7 @@ namespace tvShowProject
         public Image ImageUrls { get; set; }
 
         public string Summary { get; set; }
+
     }
 
     public class Image

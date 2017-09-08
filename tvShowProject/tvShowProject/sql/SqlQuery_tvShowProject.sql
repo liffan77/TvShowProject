@@ -12,7 +12,7 @@ create table
 		ID int PRIMARY KEY identity not null,
 		IMDB_ID nvarchar(50) UNIQUE not null,
 		Title nvarchar (max) null,
-		QueryString nvarchar (max) not null,
+		QueryString nvarchar (max) null,
 		NextReleaseDate DateTime null
 	)
 

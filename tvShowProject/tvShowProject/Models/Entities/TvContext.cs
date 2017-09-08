@@ -37,8 +37,6 @@ namespace tvShowProject.Models.Entities
                     .HasMaxLength(50);
 
                 entity.Property(e => e.NextReleaseDate).HasColumnType("datetime");
-
-                entity.Property(e => e.QueryString).IsRequired();
             });
 
             modelBuilder.Entity<User>(entity =>
