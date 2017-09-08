@@ -69,13 +69,25 @@ namespace tvShowProject.Controllers
             return null;
         }
 
+        // funkar itne ännu
         [HttpPost]
-        public IActionResult ShowDetails()
+        public IActionResult ShowDetails(string imdbId)
         {
+            // hårdkodat för testning
+            imdbId = "tt0944947";
+            // end hårdkodat
+
+            if (!ModelState.IsValid)
+                return View();
+
             // anropa API_handler
             // få datan från api-handler, skapa en ShowDetailsVM som skickas till Get
+            ApiHandler apiHandler = new ApiHandler();
+            string responseString = apiHandler.GetShowDetails(imdbId);
 
-            return null;
+            ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
+
+            return View(showDetailsVm);
         }
 
         [HttpGet]
@@ -146,7 +158,6 @@ namespace tvShowProject.Controllers
                     //User = _tvContext.User.SingleOrDefault(x => x.Id == userId),
                     //TvTable = tvTable
                 };
-
                 _tvContext.UserToTvTable.Add(userToTvTable);
                 _tvContext.SaveChanges();
             }
