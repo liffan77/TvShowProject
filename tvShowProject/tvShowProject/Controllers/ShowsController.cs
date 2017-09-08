@@ -8,6 +8,7 @@ using tvShowProject.Models.VM;
 using tvShowProject.Models.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -67,5 +68,46 @@ namespace tvShowProject.Controllers
 
             return View(userPageVM);
         }
+
+        [HttpGet]
+        public IActionResult ShowDetails(ShowDetailsVM showDetailsVM)
+        {
+            // Visa vymodellens information
+            return null;
+        }
+
+        [HttpPost]
+        public IActionResult ShowDetails()
+        {
+            // anropa API_handler
+            // få datan från api-handler, skapa en ShowDetailsVM som skickas till Get
+
+            return null;
+        }
+
+        [HttpGet]
+        public IActionResult Search(SearchResultItemVM[] searchResultItemsVM)
+        {
+
+            // visar resultatet
+            return null;
+        }
+
+        [HttpPost]
+        public IActionResult Search(UserPageVM userPageVM)
+        {
+            if (!ModelState.IsValid)
+                return View(userPageVM);
+
+            ApiHandler apiHandler = new ApiHandler();
+            string responseString = apiHandler.ShowSearch(userPageVM.SearchString);
+
+            SearchResultVM[] result = JsonConvert.DeserializeObject<SearchResultVM[]>(responseString);
+
+
+            return View(result);
+        }
+
+
     }
 }

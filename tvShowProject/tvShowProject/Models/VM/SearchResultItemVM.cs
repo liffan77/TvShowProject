@@ -10,6 +10,6 @@ namespace tvShowProject.Models.VM
     public class SearchResultItemVM
     {
         public string Title { get; set; }
-        public string Link { get; set; }
+        public string ImdbId { get; set; }
     }
 }
