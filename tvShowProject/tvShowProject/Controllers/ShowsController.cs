@@ -36,13 +36,6 @@ namespace tvShowProject.Controllers
         [HttpGet]
         public IActionResult UserPage()
         {
-            // funkar typ
-            //UserPageVM userPageVM = new UserPageVM();
-            //userPageVM.Username = User.Identity.Name;
-
-            //return View(userPageVM);
-
-
             UserPageVM userPageVM = new UserPageVM();
             userPageVM.Username = User.Identity.Name;
 
