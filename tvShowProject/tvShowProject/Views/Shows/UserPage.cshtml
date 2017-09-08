@@ -3,7 +3,10 @@
 @{
     ViewData["Title"] = "UserPage";
 }
-
+<div id="userPageNav">
+    <a href="~/shows/userSettings">Account settings</a>
+    <a href="~/accounts/LogOut">Log out</a>
+</div>
 <h1>Welcome @Model.Username</h1>
 <p>this is the user page, where the TV-show form will be displayed</p>
 <form asp-controller="Shows" asp-action="Search" >

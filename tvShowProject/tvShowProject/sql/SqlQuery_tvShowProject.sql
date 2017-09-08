@@ -52,6 +52,5 @@ delete from tv.[User]
 where ID=1007
 go
 
-insert into tv.TvTable
-	(
-	)
+insert into tv.UserToTvTable(UserID, TvTableID)
+	values (1014, 2)
