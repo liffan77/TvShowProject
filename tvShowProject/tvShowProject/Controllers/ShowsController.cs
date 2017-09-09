@@ -65,16 +65,8 @@ namespace tvShowProject.Controllers
         [HttpGet]
         public IActionResult ShowDetails(ShowDetailsVM showDetailsVM)
         {
-            // Visa vymodellens information
-            return null;
-        }
-
-        // funkar itne ännu
-        [HttpPost]
-        public IActionResult ShowDetails(string imdbId)
-        {
             // hårdkodat för testning
-            imdbId = "tt0944947";
+            string imdbId = "tt0944947";
             // end hårdkodat
 
             if (!ModelState.IsValid)
@@ -90,6 +82,28 @@ namespace tvShowProject.Controllers
             return View(showDetailsVm);
         }
 
+        // funkar itne ännu
+        [HttpPost]
+        public IActionResult ShowDetails(string imdbId)
+        {
+            //// hårdkodat för testning
+            //imdbId = "tt0944947";
+            //// end hårdkodat
+
+            //if (!ModelState.IsValid)
+            //    return View();
+
+            //// anropa API_handler
+            //// få datan från api-handler, skapa en ShowDetailsVM som skickas till Get
+            //ApiHandler apiHandler = new ApiHandler();
+            //string responseString = apiHandler.GetShowDetails(imdbId);
+
+            //ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
+
+            return View(showDetailsVm);
+        }
+
+        //Tror itne denna action behövs, eftersom vi aldrig gettar search
         [HttpGet]
         public IActionResult Search(SearchResultItemVM[] searchResultItemsVM)
         {

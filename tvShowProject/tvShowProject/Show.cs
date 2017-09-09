@@ -8,10 +8,6 @@ namespace tvShowProject
 {
     public class Show
     {
-        //public string Title { get; set; }
-        //public string Imdb_Id { get; set; }
-        //public string Epguide_Name { get; set; }
-
         public int Id { get; set; }
 
         public string Url { get; set; }
