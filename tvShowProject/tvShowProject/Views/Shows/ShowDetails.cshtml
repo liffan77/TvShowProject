@@ -6,4 +6,12 @@
 <p>@Model.ExternalIds.Imdb</p>
 <p>@Model.Summary</p>
 <img src="@Model.ImageUrls.Medium" />
+    
+@if (Model.Episodes != null)
+{
+    @foreach (var episode in Model.Episodes)
+    {
+        <p>@episode.Name</p>
+    }
+}
 

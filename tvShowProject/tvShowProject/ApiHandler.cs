@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using tvShowProject.Models;
+using tvShowProject.Models.VM;
 
 namespace tvShowProject
 {
@@ -120,6 +122,32 @@ namespace tvShowProject
         }
 
         public string GetShowDetails(string imdbId)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/lookup/shows?imdb=" + imdbId);
+            string responseString = string.Empty;
+
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    Stream stream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(stream);
+
+                    responseString = reader.ReadToEnd();
+                    reader.Close();
+                    response.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                responseString = exception.Message;
+                //throw;
+            }
+            return responseString;
+        }
+
+        public string GetEpisodes(string imdbId)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/lookup/shows?imdb=" + imdbId);
             string responseString = string.Empty;

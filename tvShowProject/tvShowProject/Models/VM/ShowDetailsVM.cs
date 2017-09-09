@@ -26,23 +26,26 @@ namespace tvShowProject.Models.VM
         public Image ImageUrls { get; set; }
 
         public string Summary { get; set; }
+
+        public Episode[] Episodes { get; set; }
+
     }
 
-    public class Image
-    {
-        public string Medium { get; set; }
-        public string Original { get; set; }
-    }
+    //public class Image
+    //{
+    //    public string Medium { get; set; }
+    //    public string Original { get; set; }
+    //}
 
-    public class Externals
-    {
-        public int? TvRage { get; set; }
-        public int? TheTvDb { get; set; }
-        public string Imdb { get; set; }
-    }
+    //public class Externals
+    //{
+    //    public int? TvRage { get; set; }
+    //    public int? TheTvDb { get; set; }
+    //    public string Imdb { get; set; }
+    //}
 
-    public class Rating
-    {
-        public float? Average { get; set; }
-    }
+    //public class Rating
+    //{
+    //    public float? Average { get; set; }
+    //}
 }

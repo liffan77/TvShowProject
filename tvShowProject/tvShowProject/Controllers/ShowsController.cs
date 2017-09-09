@@ -76,6 +76,10 @@ namespace tvShowProject.Controllers
 
             ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
 
+
+            //showDetailsVm.Episodes = apiHandler.GetEpisodes(showDetailsVm);
+
+
             return View(showDetailsVm);
         }
 

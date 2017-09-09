@@ -22,7 +22,7 @@ namespace tvShowProject
         [JsonProperty(PropertyName = "image")]
         public Image ImageUrls { get; set; }
         public string Summary { get; set; }
-        //public Episode[] Episodes { get; set; }
+        public Episode[] Episodes { get; set; }
     }
 
 
