@@ -92,7 +92,6 @@ namespace tvShowProject
 
     public class ApiHandler
     {
-
         public string ShowSearch(string show)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/search/shows?q=" + show);
@@ -145,6 +144,5 @@ namespace tvShowProject
             }
             return responseString;
         }
-
     }
 }
