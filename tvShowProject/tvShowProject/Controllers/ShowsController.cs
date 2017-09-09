@@ -63,11 +63,8 @@ namespace tvShowProject.Controllers
 
 
         [HttpGet]
-        public IActionResult ShowDetails(ShowDetailsVM showDetailsVM)
+        public IActionResult ShowDetails(string id)
         {
-            // hårdkodat för testning
-            string imdbId = "tt0944947";
-            // end hårdkodat
 
             if (!ModelState.IsValid)
                 return View();
@@ -75,7 +72,7 @@ namespace tvShowProject.Controllers
             // anropa API_handler
             // få datan från api-handler, skapa en ShowDetailsVM som skickas till Get
             ApiHandler apiHandler = new ApiHandler();
-            string responseString = apiHandler.GetShowDetails(imdbId);
+            string responseString = apiHandler.GetShowDetails(id);
 
             ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
 
@@ -84,7 +81,7 @@ namespace tvShowProject.Controllers
 
         // funkar itne ännu
         [HttpPost]
-        public IActionResult ShowDetails(string imdbId)
+        public IActionResult ShowDetails(string imdbId, int deleteMe)
         {
             //// hårdkodat för testning
             //imdbId = "tt0944947";
@@ -100,7 +97,7 @@ namespace tvShowProject.Controllers
 
             //ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
 
-            return View(showDetailsVm);
+            return View();
         }
 
         //Tror itne denna action behövs, eftersom vi aldrig gettar search

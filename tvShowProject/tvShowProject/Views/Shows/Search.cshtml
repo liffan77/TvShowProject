@@ -5,9 +5,13 @@
     @foreach (var result in Model)
     {
         <tr>
-            <td>@result.Show.Title</td>
             <td>
-                <form asp-controller="Shows" asp-action="Follow" asp-route-id="@result.Show.ExternalIds.Imdb" asp-route-title="@result.Show.Title">
+                <a asp-controller="Shows" asp-action="ShowDetails" asp-route-id="@result.Show.ExternalIds.Imdb">
+                    @result.Show.Title
+                </a>
+            </td>
+            <td>
+                <form asp-controller="Shows" asp-action="Follow" asp-route-id="@result.Show.ExternalIds.Imdb" asp-route-title="@result.Show.Title" >
                     <input type="submit" value="Follow" />
                 </form>
             </td>
