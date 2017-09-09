@@ -3,17 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - tvShowProject</title>
-    </head>
-    <body>
-        @*<div class="navBar">
+</head>
+<body>
+    @*<div class="navBar">
             <a href="~/accounts/Index">Index</a>
             <a href="~/shows/UserPage">userPage</a>
             <a href="~/accounts/LogIn">Log in</a>
             <a href="~/accounts/Register">Register</a>
-            
+
         </div>*@
-        @RenderBody()
-        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+    @RenderBody()
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+    <script src="~/js/site.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
