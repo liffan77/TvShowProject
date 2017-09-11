@@ -27,7 +27,7 @@ namespace tvShowProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = ProjTest; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False";
+            var connString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<TvContext>(o => o.UseSqlServer(connString));
             services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
             services.AddIdentity<IdentityUser, IdentityRole>(o =>
@@ -64,7 +64,7 @@ namespace tvShowProject
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Accounts}/{action=Index}/{id?}");
             });
         }
     }

@@ -3,7 +3,7 @@
 
 <h1>in details</h1>
 <p>@Model.Title</p>
-<p>@Model.Summary</p>
+<p>@Html.Raw(Model.Summary)</p>
 <img src="@Model.ImageUrls.Medium" />
     
 @if (Model.Episodes != null)
