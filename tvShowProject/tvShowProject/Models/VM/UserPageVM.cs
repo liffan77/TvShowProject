@@ -12,6 +12,5 @@ namespace tvShowProject.Models.VM
         public string SearchString { get; set; }
         public SearchResultItemVM[] SearchResultItems { get; set; }
         public FollowedShowItemVM[] FollowedShowItems { get; set; }
-        //public SearchResultVM SearchResultVM { get; set; } // behövs ej?
     }
 }

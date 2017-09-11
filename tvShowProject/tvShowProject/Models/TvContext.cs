@@ -19,5 +19,20 @@ namespace tvShowProject.Models.Entities
             User.Add(new Entities.User { AspNetUserId = aspNetUserId });
             await SaveChangesAsync();
         }
+
+        public void UnFollowDB(int tvMazeId, int userId)
+        {
+            // ta fram TvTableId för att kunna ta bort kopplingen i mellanliggande DB
+            var tvTableId = TvTable
+                .SingleOrDefault(i => i.TvMazeId == tvMazeId).Id;
+
+            // hämta raden som ska tas bort från UserToTvTable
+            var tmp = UserToTvTable
+                .SingleOrDefault(x => x.UserId == userId && x.TvTableId == tvTableId);
+
+            UserToTvTable.Remove(tmp);
+            SaveChanges();
+        }
+        
     }
 }

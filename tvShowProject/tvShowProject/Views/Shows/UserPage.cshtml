@@ -1,8 +1,6 @@
 ﻿@using tvShowProject.Models.VM
 @model UserPageVM
-@{
-    ViewData["Title"] = "UserPage";
-}
+
 <div id="userPageNav">
     <a href="~/shows/userSettings">Account settings</a>
     <a href="~/accounts/LogOut">Log out</a>
@@ -25,7 +23,11 @@
         {
         <tr>
             <td>@item.Title</td>
-            <td>@item.ImdbId</td>
+            <td>
+                <form asp-controller="Shows" asp-action="UnFollow" asp-route-tvMazeId="@item.Id" >
+                    <input type="submit" value="Unfollow" />
+                </form>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><p>Test...</p></td>
