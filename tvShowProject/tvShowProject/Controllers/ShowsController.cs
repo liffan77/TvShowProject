@@ -52,7 +52,7 @@ namespace tvShowProject.Controllers
                 .Select(x => new FollowedShowItemVM
                 {
                     Title = x.TvTable.Title,
-                    ImdbId = x.TvTable.ImdbId
+                    Id = x.TvTable.TvMazeId
                 })
                 .ToArray();
 
@@ -63,21 +63,31 @@ namespace tvShowProject.Controllers
 
 
         [HttpGet]
-        public IActionResult ShowDetails(string id)
+        public IActionResult ShowDetails(int id)
         {
 
             if (!ModelState.IsValid)
                 return View();
 
-            // anropa API_handler
-            // få datan från api-handler, skapa en ShowDetailsVM som skickas till Get
-            ApiHandler apiHandler = new ApiHandler();
-            string responseString = apiHandler.GetShowDetails(id);
+            //// anropa API_handler
+            //// få datan från api-handler, skapa en ShowDetailsVM som skickas till Get
+            //ApiHandler apiHandler = new ApiHandler();
+            //string responseString = apiHandler.GetShowDetails(id);
 
-            ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
+            //ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
 
 
-            //showDetailsVm.Episodes = apiHandler.GetEpisodes(showDetailsVm);
+            ////showDetailsVm.Episodes = apiHandler.GetEpisodes(showDetailsVm);
+
+            TvShow tvShow = ApiHandler.GetTvShowAndEpisodeDetails(id);
+            ShowDetailsVM showDetailsVm = new ShowDetailsVM
+            {
+                Id = tvShow.Id,
+                Title = tvShow.Name,
+                Summary = tvShow.Summary,
+                Episodes = tvShow.EmbeddedItems.Episodes,
+                ImageUrls = tvShow.Image
+            };
 
 
             return View(showDetailsVm);
@@ -119,16 +129,66 @@ namespace tvShowProject.Controllers
             if (!ModelState.IsValid)
                 return View(userPageVM);
 
-            ApiHandler apiHandler = new ApiHandler();
-            string responseString = apiHandler.ShowSearch(userPageVM.SearchString);
+            SearchResult[] searchResult = ApiHandler.SearchForShow(userPageVM.SearchString);
 
-            SearchResultVM[] result = JsonConvert.DeserializeObject<SearchResultVM[]>(responseString);
-
-            return View(result);
+            return View(searchResult);
         }
 
+        //[HttpPost]
+        //public IActionResult Follow(string id, string title)
+        //{
+        //    //todo banta ner controllers, lägg logiken i tvContext
+
+        //    //todo visa bekräftelse
+
+        //    // add to DB
+        //    // lägg till i tvTable OM den inte finns
+        //    // finns id i tvTable?
+
+        //    // fråga DB, finns detta IMDB-id redan?
+        //    var tvTable = _tvContext.TvTable
+        //        .SingleOrDefault(s => s.ImdbId == id);
+
+        //    // om showen inte fanns, nya upp den och spara i DB
+        //    if (tvTable == null)
+        //    {
+        //        // nya upp en entitet
+        //        tvTable = new TvTable
+        //        {
+        //            ImdbId = id,
+        //            Title = title
+        //        };
+
+        //        // lägg till den nya entiteten till DB
+        //        _tvContext.TvTable.Add(tvTable);
+        //        _tvContext.SaveChanges(); // måste spara här för att få ett ID
+        //    }
+
+        //    // kolla att användaren inte redan följer serien
+        //    int userId = GetUserId();
+        //    var tmp2 = _tvContext.UserToTvTable
+        //        .SingleOrDefault(u => u.TvTableId == tvTable.Id && u.UserId == userId);
+
+        //    // om användaren ej redan följer serien
+        //    if (tmp2 == null)
+        //    {
+        //        // skapa ny post i UserToTvTable DB
+        //        UserToTvTable userToTvTable = new UserToTvTable
+        //        {
+        //            TvTableId = tvTable.Id,
+        //            UserId = userId,
+        //            //User = _tvContext.User.SingleOrDefault(x => x.Id == userId),
+        //            //TvTable = tvTable
+        //        };
+        //        _tvContext.UserToTvTable.Add(userToTvTable);
+        //        _tvContext.SaveChanges();
+        //    }
+
+        //    return RedirectToAction(nameof(UserPage));
+        //}
+
         [HttpPost]
-        public IActionResult Follow(string id, string title)
+        public IActionResult Follow(int id, string title)
         {
             //todo banta ner controllers, lägg logiken i tvContext
 
@@ -140,7 +200,7 @@ namespace tvShowProject.Controllers
 
             // fråga DB, finns detta IMDB-id redan?
             var tvTable = _tvContext.TvTable
-                .SingleOrDefault(s => s.ImdbId == id);
+                .SingleOrDefault(s => s.TvMazeId == id);
 
             // om showen inte fanns, nya upp den och spara i DB
             if (tvTable == null)
@@ -148,7 +208,7 @@ namespace tvShowProject.Controllers
                 // nya upp en entitet
                 tvTable = new TvTable
                 {
-                    ImdbId = id,
+                    TvMazeId = id,
                     Title = title
                 };
 
@@ -170,9 +230,8 @@ namespace tvShowProject.Controllers
                 {
                     TvTableId = tvTable.Id,
                     UserId = userId,
-                    //User = _tvContext.User.SingleOrDefault(x => x.Id == userId),
-                    //TvTable = tvTable
                 };
+
                 _tvContext.UserToTvTable.Add(userToTvTable);
                 _tvContext.SaveChanges();
             }

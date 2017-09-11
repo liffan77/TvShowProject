@@ -25,18 +25,7 @@ namespace tvShowProject.Models.Entities
             {
                 entity.ToTable("TvTable", "tv");
 
-                entity.HasIndex(e => e.ImdbId)
-                    .HasName("UQ__TvTable__21608C1854EDC7C9")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.ImdbId)
-                    .IsRequired()
-                    .HasColumnName("IMDB_ID")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.NextReleaseDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<User>(entity =>

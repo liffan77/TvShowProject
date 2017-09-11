@@ -2,7 +2,6 @@
 {
     public class Rating
     {
-        public float? Average { get; set; }
+        public double? average { get; set; }
     }
 }
-

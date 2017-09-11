@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace tvShowProject.Models.VM
 {
@@ -6,7 +7,7 @@ namespace tvShowProject.Models.VM
     {
         public int Id { get; set; }
 
-        public string Url { get; set; }
+        public Uri Url { get; set; }
 
         [JsonProperty(PropertyName = "name")]
         public string Title { get; set; }

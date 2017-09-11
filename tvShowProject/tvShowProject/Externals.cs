@@ -2,9 +2,8 @@
 {
     public class Externals
     {
-        public int? TvRage { get; set; }
-        public int? TheTvDb { get; set; }
         public string Imdb { get; set; }
+        public int? Tvrage { get; set; }
+        public int? Thetvdb { get; set; }
     }
 }
-

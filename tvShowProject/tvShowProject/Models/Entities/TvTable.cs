@@ -11,10 +11,8 @@ namespace tvShowProject.Models.Entities
         }
 
         public int Id { get; set; }
-        public string ImdbId { get; set; }
         public string Title { get; set; }
-        public string QueryString { get; set; }
-        public DateTime? NextReleaseDate { get; set; }
+        public int? TvMazeId { get; set; }
 
         public ICollection<UserToTvTable> UserToTvTable { get; set; }
     }

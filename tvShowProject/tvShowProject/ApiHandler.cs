@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -92,11 +93,93 @@ namespace tvShowProject
     //}
 
 
-    public class ApiHandler
+    //public class ApiHandler
+    //{
+    //    public string ShowSearch(string show)
+    //    {
+    //        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/search/shows?q=" + show);
+    //        string responseString = string.Empty;
+
+    //        try
+    //        {
+    //            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+    //            if (response.StatusCode == HttpStatusCode.OK)
+    //            {
+    //                Stream stream = response.GetResponseStream();
+    //                StreamReader reader = new StreamReader(stream);
+
+    //                responseString = reader.ReadToEnd();
+    //                reader.Close();
+    //                response.Close();
+    //            }
+    //        }
+    //        catch (Exception exception)
+    //        {
+    //            responseString = exception.Message;
+    //            //throw;
+    //        }
+    //        return responseString;
+
+    //    }
+
+    //    public string GetShowDetails(string imdbId)
+    //    {
+    //        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/lookup/shows?imdb=" + imdbId);
+    //        string responseString = string.Empty;
+
+    //        try
+    //        {
+    //            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+    //            if (response.StatusCode == HttpStatusCode.OK)
+    //            {
+    //                Stream stream = response.GetResponseStream();
+    //                StreamReader reader = new StreamReader(stream);
+
+    //                responseString = reader.ReadToEnd();
+    //                reader.Close();
+    //                response.Close();
+    //            }
+    //        }
+    //        catch (Exception exception)
+    //        {
+    //            responseString = exception.Message;
+    //            //throw;
+    //        }
+    //        return responseString;
+    //    }
+
+    //    public string GetEpisodes(string imdbId)
+    //    {
+    //        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/lookup/shows?imdb=" + imdbId);
+    //        string responseString = string.Empty;
+
+    //        try
+    //        {
+    //            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+    //            if (response.StatusCode == HttpStatusCode.OK)
+    //            {
+    //                Stream stream = response.GetResponseStream();
+    //                StreamReader reader = new StreamReader(stream);
+
+    //                responseString = reader.ReadToEnd();
+    //                reader.Close();
+    //                response.Close();
+    //            }
+    //        }
+    //        catch (Exception exception)
+    //        {
+    //            responseString = exception.Message;
+    //            //throw;
+    //        }
+    //        return responseString;
+    //    }
+    //}
+
+    class ApiHandler
     {
-        public string ShowSearch(string show)
+        public static SearchResult[] SearchForShow(string searchString)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/search/shows?q=" + show);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/search/shows?q=" + searchString);
             string responseString = string.Empty;
 
             try
@@ -117,13 +200,71 @@ namespace tvShowProject
                 responseString = exception.Message;
                 //throw;
             }
-            return responseString;
+
+            SearchResult[] searchResults = JsonConvert.DeserializeObject<SearchResult[]>(responseString);
+            return searchResults;
+        }
+
+        public static Episode[] GetEmbeddedEpisodes(int id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/shows/" + id + "/episodes");
+            string responseString = string.Empty;
+
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    Stream stream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(stream);
+
+                    responseString = reader.ReadToEnd();
+                    reader.Close();
+                    response.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                responseString = exception.Message;
+                //throw;
+            }
+
+            Episode[] episodes = JsonConvert.DeserializeObject<Episode[]>(responseString);
+            return episodes;
+        }
+
+        public static Episode[] GetShowsEpisodes(int id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/shows/" + id + "/episodes");
+            string responseString = string.Empty;
+
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    Stream stream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(stream);
+
+                    responseString = reader.ReadToEnd();
+                    reader.Close();
+                    response.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                responseString = exception.Message;
+                //throw;
+            }
+
+            Episode[] episodes = JsonConvert.DeserializeObject<Episode[]>(responseString);
+            return episodes;
 
         }
 
-        public string GetShowDetails(string imdbId)
+        public static TvShow GetTvShowAndEpisodeDetails(int id)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/lookup/shows?imdb=" + imdbId);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create($"http://api.tvmaze.com/shows/{id}?embed=episodes");
             string responseString = string.Empty;
 
             try
@@ -144,33 +285,9 @@ namespace tvShowProject
                 responseString = exception.Message;
                 //throw;
             }
-            return responseString;
-        }
 
-        public string GetEpisodes(string imdbId)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/lookup/shows?imdb=" + imdbId);
-            string responseString = string.Empty;
-
-            try
-            {
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    Stream stream = response.GetResponseStream();
-                    StreamReader reader = new StreamReader(stream);
-
-                    responseString = reader.ReadToEnd();
-                    reader.Close();
-                    response.Close();
-                }
-            }
-            catch (Exception exception)
-            {
-                responseString = exception.Message;
-                //throw;
-            }
-            return responseString;
+            TvShow tvShow = JsonConvert.DeserializeObject<TvShow>(responseString);
+            return tvShow;
         }
     }
 }
