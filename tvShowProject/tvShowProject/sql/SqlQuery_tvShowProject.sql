@@ -54,3 +54,20 @@ go
 
 insert into tv.UserToTvTable(UserID, TvTableID)
 	values (1014, 2)
+
+
+	USE [ProjTest]
+GO
+
+/****** Object: Table [tv].[TvTable] Script Date: 11/09/2017 15:40:50 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [tv].[TvTable] (
+   [ID]       INT            IDENTITY (1, 1) NOT NULL,
+   [Title]    NVARCHAR (MAX) NULL,
+   [TvMazeId] INT            NULL
+);
