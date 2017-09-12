@@ -126,6 +126,7 @@ namespace tvShowProject.Controllers
         [HttpPost]
         public IActionResult Settings(string email, string aspNetUserId)
         {
+            // måste fixa så att du ej kan ange en tom mailadress
             if (!ModelState.IsValid)
             {
                 return View();
