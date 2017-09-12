@@ -3,9 +3,15 @@
 
 <h1>in details</h1>
 <p>@Model.Title</p>
-<p>@Html.Raw(Model.Summary)</p>
-<img src="@Model.ImageUrls.Medium" />
-    
+@if (Model.Summary != null)
+{
+    <p>@Html.Raw(Model.Summary)</p>
+}
+@if (Model.ImageUrls != null)
+{
+    <img src="@Model.ImageUrls.Medium" />
+}
+
 @if (Model.Episodes != null)
 {
     @foreach (var episode in Model.Episodes)
