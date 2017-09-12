@@ -12,6 +12,7 @@
         <input asp-for="SearchString" />
         <input type="submit" value="Search" />
     </form>
+    @*--Gammal lösning spara tills vi bytt klart--*@
     <table>
         <thead>
             <tr>
@@ -31,9 +32,83 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2"><p>Test...</p></td>
+                    <td colspan="2">
+                        <p>Test...</p>
+                        <a>Episodes</a>
+                    </td>
+                    <td colspan="2">
+                        <p>test igen</p>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
-    </div>
+
+    @*--Ny variant, översätt till våra värden--*@
+    @foreach (var item in Model.FollowedShowItems)
+    {
+        <div id="grandparent" class="list-group-item">
+            <div id="expander" data-toggle="collapse" data-target="#grandparentContent" data-role="expander" data-group-id="grandparent">
+                <ul class="list-inline">
+                    <li id="grandparentIcon">&gt;</li>
+                    <li>@item.Title &nbsp; <form asp-controller="Shows" asp-action="UnFollow" asp-route-tvMazeId="@item.Id"><input type="submit" value="Unfollow" /> </form></li>
+                </ul>
+            </div>
+
+            <div class="collapse" id="grandparentContent" aria-expanded="true">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Created On</th>
+                            <th>Last Modified</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td colspan="4">
+                                <p>Summary</p>
+                            </td>
+                        </tr>
+                        <tr data-toggle="collapse" data-target="#childOne">
+                            <td><div>&gt;</div></td>
+                            <td><a>Episodes</a></td>
+                            <td>04/02/2017</td>
+                            <td>04/04/2017</td>
+                        </tr>
+
+                        <tr class="collapse" id="childOne">
+                            <td></td>
+                            <td>Child A</td>
+                            <td>04/01/2017</td>
+                            <td>04/05/2017</td>
+                        </tr>
+
+                        <tr class="collapse">
+                            <td></td>
+                            <td>Child B</td>
+                            <td>04/03/2017</td>
+                            <td>04/04/2017</td>
+                        </tr>
+
+                        <tr data-toggle="collapse" data-target="#childTwo">
+                            <td><div>&gt;</div></td>
+                            <td>Parent 2</td>
+                            <td>04/03/2017</td>
+                            <td>04/10/2017</td>
+                        </tr>
+
+                        <tr class="collapse" id="childTwo">
+                            <td></td>
+                            <td>Child X</td>
+                            <td>04/10/2017</td>
+                            <td>04/11/2017</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
