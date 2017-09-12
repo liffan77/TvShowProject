@@ -9,6 +9,9 @@ namespace tvShowProject.Models.VM
     [Bind(Prefix = nameof(UserPageVM.FollowedShowItems))]
     public class FollowedShowItemVM
     {
+        /// <summary>
+        /// TvMazeId
+        /// </summary>
         public int? Id { get; set; }
         public string Title { get; set; }
         public string Link { get; set; }
