@@ -12,7 +12,7 @@ namespace tvShowProject
         public DateTime? Airdate { get; set; }
         public DateTimeOffset? Airstamp { get; set; }
         public int Runtime { get; set; }
-        public Image image { get; set; }
+        public Image Image { get; set; }
         public string Summary { get; set; }
     }
 }

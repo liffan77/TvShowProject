@@ -93,6 +93,8 @@ namespace tvShowProject.Controllers
             #region Skapa användaren
             await _identityContext.Database.EnsureCreatedAsync();
             IdentityUser user = new IdentityUser(model.Username);
+            user.Email = model.Email;
+
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
@@ -108,18 +110,52 @@ namespace tvShowProject.Controllers
 
             #region Logga in och skicka användaren vidare
             await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
-            //return RedirectT
-            //return RedirectToAction(nameof(UserPage));
-            //return Redirect("/Shows/UserPage");
+
             return RedirectToAction("UserPage", "Shows");
 
             #endregion
         }
 
+        [HttpPost]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Settings(LoggedInUserVM loggedInUserVM)
+        {
+            return RedirectToAction(nameof(Settings));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Settings()
+        {
+
+            var aspNetId = _userManager
+                .GetUserId(HttpContext.User);
+
+            //var user = new IdentityUser(User.Identity.Name);
+
+            //var userEmail = await _userManager.GetEmailAsync(user);
+
+            var userEmail = _identityContext.Users
+                .FirstOrDefault(x => x.Id == aspNetId)
+                .Email;
+
+            var userName = _identityContext.Users
+                .FirstOrDefault(x => x.Id == aspNetId)
+                .UserName;
+
+
+            LoggedInUserVM loggedInUserVM = new LoggedInUserVM
+            {
+                Username = userName,
+                Email = userEmail
+            };
+
+            return View(loggedInUserVM);
         }
     }
 }
