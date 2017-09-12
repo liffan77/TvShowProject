@@ -124,21 +124,28 @@ namespace tvShowProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Settings(LoggedInUserVM loggedInUserVM)
+        public IActionResult Settings(string email, string aspNetUserId)
         {
-            return RedirectToAction(nameof(Settings));
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            _identityContext.Users
+                .FirstOrDefault(u => u.Id == aspNetUserId)
+                .Email = email;
+
+            _identityContext.SaveChanges();
+
+            return RedirectToAction("UserPage", "Shows");
+            //return RedirectToAction(nameof(Settings));
         }
 
         [HttpGet]
         public async Task<IActionResult> Settings()
         {
-
             var aspNetId = _userManager
                 .GetUserId(HttpContext.User);
-
-            //var user = new IdentityUser(User.Identity.Name);
-
-            //var userEmail = await _userManager.GetEmailAsync(user);
 
             var userEmail = _identityContext.Users
                 .FirstOrDefault(x => x.Id == aspNetId)
@@ -151,6 +158,7 @@ namespace tvShowProject.Controllers
 
             LoggedInUserVM loggedInUserVM = new LoggedInUserVM
             {
+                AspNetId = aspNetId,
                 Username = userName,
                 Email = userEmail
             };

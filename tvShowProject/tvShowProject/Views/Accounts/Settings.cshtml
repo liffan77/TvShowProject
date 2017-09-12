@@ -7,13 +7,12 @@
     @*<label asp-for="Password"></label>
     <input asp-for="Password" />
     <span asp-validation-for="Password"></span>*@
-    <br />
-    <p>Current Email</p>
     <label asp-for="Email">@Model.Email</label>
     <input asp-for="Email" />
     <span asp-validation-for="Email"></span>
     <br />
-    <input type="submit" value="Register" />
+    @*<input type="submit" value="Register" />*@
+    <input type="submit" value="Save changes" asp-route-aspNetUserId="@Model.AspNetId" asp-route-email="@Model.Email" />
 </form>
 
 
