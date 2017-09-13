@@ -8,12 +8,16 @@
 <div id="myWrapper">
     <h1>Welcome @Model.Username</h1>
     <p>this is the user page, where the TV-show form will be displayed</p>
-    <form asp-controller="Shows" asp-action="Search">
-        <input asp-for="SearchString" />
-        <input type="submit" value="Search" />
-    </form>
+    @*<form asp-controller="Shows" asp-action="Search">*@
+        <input asp-for="SearchString" id="searchBox" />
+        @*<input type="submit" value="Search" />*@
+        <button type="button" onclick="getSearchResult()">PW Search</button>
+    @*</form>*@
+    <div id="tmp">
+
+    </div>
     @*--Gammal lösning spara tills vi bytt klart--*@
-    <table>
+    @*<table>
         <thead>
             <tr>
                 <th><h3>Title</h3></th>
@@ -42,7 +46,7 @@
                 </tr>
             }
         </tbody>
-    </table>
+    </table>*@
 
     @*--Ny variant, översätt till våra värden--*@
     @foreach (var item in Model.FollowedShowItems)
@@ -51,7 +55,7 @@
             <div id="expander" data-toggle="collapse" data-target="#grandparentContent" data-role="expander" data-group-id="grandparent">
                 <ul class="list-inline">
                     <li id="grandparentIcon">&gt;</li>
-                    <li>@item.Title &nbsp; <form asp-controller="Shows" asp-action="UnFollow" asp-route-tvMazeId="@item.Id"><input type="submit" value="Unfollow" /> </form></li>
+                    <li></li>
                 </ul>
             </div>
 
@@ -67,6 +71,12 @@
                     </thead>
 
                     <tbody>
+                        <tr data-toggle="collapse" data-target="#childOne">
+                            <td>@item.Title &nbsp; <form asp-controller="Shows" asp-action="UnFollow" asp-route-tvMazeId="@item.Id"><input type="submit" value="Unfollow" /> </form></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                         <tr>
                             <td colspan="4">
                                 <p>Summary</p>
@@ -74,14 +84,14 @@
                         </tr>
                         <tr data-toggle="collapse" data-target="#childOne">
                             <td><div>&gt;</div></td>
-                            <td><a>Episodes</a></td>
+                            <td>@item.Title &nbsp; <form asp-controller="Shows" asp-action="UnFollow" asp-route-tvMazeId="@item.Id"><input type="submit" value="Unfollow" /> </form></td>
                             <td>04/02/2017</td>
                             <td>04/04/2017</td>
                         </tr>
 
                         <tr class="collapse" id="childOne">
                             <td></td>
-                            <td>Child A</td>
+                            <td><a>Episodes</a></td>
                             <td>04/01/2017</td>
                             <td>04/05/2017</td>
                         </tr>

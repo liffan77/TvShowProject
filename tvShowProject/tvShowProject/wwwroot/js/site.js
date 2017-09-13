@@ -10,6 +10,17 @@
 //        }
 //    });
 //});
+function getSearchResult() {
+    $.ajax({
+        url: "/Shows/Search",
+        type: "GET",
+        data: { "searchString": $("#searchBox").val()},
+        success: function (result) {
+            console.log(result);
+            $("#tmp").html(result);
+        }
+    });
+}
 
 $(document).ready('.collapse').on('show.bs.collapse', function () {
     var groupId = $('#expander').attr('data-group-id');

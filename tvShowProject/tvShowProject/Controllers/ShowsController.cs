@@ -117,23 +117,28 @@ namespace tvShowProject.Controllers
 
         //Tror itne denna action behövs, eftersom vi aldrig gettar search
         [HttpGet]
-        public IActionResult Search(SearchResultItemVM[] searchResultItemsVM)
+        //public IActionResult Search(SearchResultItemVM[] searchResultItems)
+            public IActionResult Search(string searchString)
         {
 
             // visar resultatet
-            return null;
+            //return null;
+
+            SearchResult[] searchResult = ApiHandler.SearchForShow(searchString);
+
+            return PartialView("Search", searchResult);
         }
 
-        [HttpPost]
-        public IActionResult Search(UserPageVM userPageVM)
-        {
-            if (!ModelState.IsValid)
-                return View(userPageVM);
+        //[HttpPost]
+        //public IActionResult Search(UserPageVM userPageVM)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View(userPageVM);
 
-            SearchResult[] searchResult = ApiHandler.SearchForShow(userPageVM.SearchString);
+        //    SearchResult[] searchResult = ApiHandler.SearchForShow(userPageVM.SearchString);
 
-            return View(searchResult);
-        }
+        //    return PartialView("Search", searchResult);
+        //}
 
         [HttpPost]
         public IActionResult Follow(int id, string title)
