@@ -127,9 +127,9 @@ namespace tvShowProject.Controllers
         public IActionResult Settings(string email, string aspNetUserId)
         {
             // måste fixa så att du ej kan ange en tom mailadress
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || string.IsNullOrWhiteSpace(email))
             {
-                return View();
+                return View(new LoggedInUserVM { AspNetId = aspNetUserId, Email = email });
             }
 
             _identityContext.Users
