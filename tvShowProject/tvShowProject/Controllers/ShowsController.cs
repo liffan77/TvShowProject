@@ -89,10 +89,13 @@ namespace tvShowProject.Controllers
                 Episodes = tvShow.EmbeddedItems.Episodes,
                 ImageUrls = tvShow.Image
             };
-
-
-            return View(showDetailsVm);
+            
+            return PartialView("ShowDetails", showDetailsVm);
         }
+
+        //var viewModel = dm.GetCatViewModel(id);
+
+        //    return PartialView("CatBox", viewModel);
 
         // funkar itne ännu
         [HttpPost]
@@ -128,6 +131,7 @@ namespace tvShowProject.Controllers
 
             return PartialView("Search", searchResult);
         }
+
 
         //[HttpPost]
         //public IActionResult Search(UserPageVM userPageVM)

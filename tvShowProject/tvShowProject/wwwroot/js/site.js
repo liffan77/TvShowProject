@@ -14,7 +14,7 @@ function getSearchResult() {
     $.ajax({
         url: "/Shows/Search",
         type: "GET",
-        data: { "searchString": $("#searchBox").val()},
+        data: { "searchString": $("#searchBox").val() },
         success: function (result) {
             console.log(result);
             $("#tmp").html(result);
@@ -25,15 +25,27 @@ function getSearchResult() {
 $(document).ready('.collapse').on('show.bs.collapse', function () {
     var groupId = $('#expander').attr('data-group-id');
     console.log(groupId);
-    if (groupId) {
-        $('#grandparentIcon').html('v');
-    }
+    //if (groupId) {
+    //    $('#grandparentIcon').html('v');
+    //}
 });
 
 $('.collapse').on('hide.bs.collapse', function () {
     var groupId = $('#expander').attr('data-group-id');
     console.log(groupId);
-    if (groupId) {
-        $('#' + groupId + 'Icon').html('>');
-    }
+    //if (groupId) {
+    //    $('#' + groupid + 'icon').html('>');
+    //}
 });
+
+function getShowDetails(id) {
+    $.ajax({
+        url: "/Shows/ShowDetails",
+        type: "GET",
+        data: { "id": id },
+        success: function (result) {
+            console.log(result);
+            $("#detailsView").html(result);
+        }
+    });
+}
