@@ -289,5 +289,33 @@ namespace tvShowProject
             TvShow tvShow = JsonConvert.DeserializeObject<TvShow>(responseString);
             return tvShow;
         }
+
+        public static Episode GetLatestEpisode(int? id)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://api.tvmaze.com/shows/" + id + "/episodes");
+            string responseString = string.Empty;
+
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    Stream stream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(stream);
+
+                    responseString = reader.ReadToEnd();
+                    reader.Close();
+                    response.Close();
+                }
+            }
+            catch (Exception exception)
+            {
+                responseString = exception.Message;
+                //throw;
+            }
+
+            Episode[] episodes = JsonConvert.DeserializeObject<Episode[]>(responseString);
+            return episodes[episodes.Length - 1];
+        }
     }
 }
