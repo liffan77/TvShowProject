@@ -1,10 +1,15 @@
 ﻿@using tvShowProject.Models.VM
 @model UserPageVM
 
-<div id="userPageNav">
+@*<div id="userPageNav">
     <a href="~/accounts/Settings">Account settings</a>
     <a href="~/accounts/Index">Log out</a>
+</div>*@
+
+<div id="userPageNav">
+    <form asp-controller="Accounts" asp-action="LogOut"><input type="submit" value="Logout"/></form>
 </div>
+
 <div id="myWrapper">
     <h1>Welcome @Model.Username</h1>
     <p>this is the user page, where the TV-show form will be displayed</p>
