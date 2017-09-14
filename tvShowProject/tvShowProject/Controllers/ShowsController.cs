@@ -53,7 +53,9 @@ namespace tvShowProject.Controllers
                 .Select(x => new FollowedShowItemVM
                 {
                     Title = x.TvTable.Title,
-                    Id = x.TvTable.TvMazeId
+                    Id = x.TvTable.TvMazeId,
+                    // använd apihandler för att sätta bool-proppen is released
+                    //ReleasedToday = ApiHandler.checkifreleasedtoday();
                 })
                 .ToArray();
 
@@ -70,15 +72,6 @@ namespace tvShowProject.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            //// anropa API_handler
-            //// få datan från api-handler, skapa en ShowDetailsVM som skickas till Get
-            //ApiHandler apiHandler = new ApiHandler();
-            //string responseString = apiHandler.GetShowDetails(id);
-
-            //ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
-
-
-            ////showDetailsVm.Episodes = apiHandler.GetEpisodes(showDetailsVm);
 
             TvShow tvShow = ApiHandler.GetTvShowAndEpisodeDetails(id);
             ShowDetailsVM showDetailsVm = new ShowDetailsVM

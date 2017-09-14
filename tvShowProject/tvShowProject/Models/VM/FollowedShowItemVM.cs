@@ -17,5 +17,6 @@ namespace tvShowProject.Models.VM
         public string Link { get; set; }
         public string ImdbId { get; set; }
         public string LatestEpisode { get; set; }
+        public bool ReleasedToday { get; set; }
     }
 }

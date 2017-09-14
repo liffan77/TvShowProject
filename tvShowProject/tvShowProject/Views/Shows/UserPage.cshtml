@@ -74,15 +74,15 @@
                         <tr data-toggle="collapse" data-target="@($"#childOne{item.Id}")" onclick="getShowDetails(@item.Id)">
                             <td colspan="3">
                                 <button type="button" onclick="getShowDetails(@item.Id)">Details</button>
-                                <div id="detailsView"></div>
+                                <div id="@($"detailsView{item.Id}")"></div>
                             </td>
                         </tr>
 
                         <tr class="collapse" id="@($"childOne{item.Id}")">
                             <td></td>
-                            <td>Child A</td>
-                            <td>04/01/2017</td>
-                            <td>04/05/2017</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
@@ -90,5 +90,5 @@
         </div>
     }
 </div>
-<button type="button" onclick="getShowDetails()">Details</button>
-<div id="detailsView"></div>
+@*<button type="button" onclick="getShowDetails()">Details</button>*@
+@*<div id="detailsView"></div>*@

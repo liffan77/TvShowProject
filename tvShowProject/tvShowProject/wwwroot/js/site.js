@@ -45,7 +45,7 @@ function getShowDetails(id) {
         data: { "id": id },
         success: function (result) {
             console.log(result);
-            $("#detailsView").html(result);
+            $("#detailsView" + id).html(result);
         }
     });
 }
