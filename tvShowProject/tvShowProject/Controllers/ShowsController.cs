@@ -53,7 +53,9 @@ namespace tvShowProject.Controllers
                 .Select(x => new FollowedShowItemVM
                 {
                     Title = x.TvTable.Title,
-                    Id = x.TvTable.TvMazeId
+                    Id = x.TvTable.TvMazeId,
+                    // använd apihandler för att sätta bool-proppen is released
+                    //ReleasedToday = ApiHandler.checkifreleasedtoday();
                 })
                 .ToArray();
 
