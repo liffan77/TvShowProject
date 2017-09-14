@@ -55,7 +55,7 @@ namespace tvShowProject.Controllers
                     Title = x.TvTable.Title,
                     Id = x.TvTable.TvMazeId,
                     // använd apihandler för att sätta bool-proppen is released
-                    //ReleasedToday = ApiHandler.checkifreleasedtoday();
+                    ReleasedToday = ApiHandler.CheckIfAnyEpisodeReleasedToday(x.TvTable.TvMazeId)
                 })
                 .ToArray();
 
