@@ -9,7 +9,6 @@ using tvShowProject.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using tvShowProject.Models.VM;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace tvShowProject.Controllers
 {
@@ -28,13 +27,12 @@ namespace tvShowProject.Controllers
             _tvContext = tvContext;
         }
 
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize] //Lägg överst för att kräva en inloggad session för att komma åt sidorna.
+        [Authorize] 
         [HttpGet]
         public IActionResult UserPage()
         {
@@ -123,10 +121,9 @@ namespace tvShowProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
+        [HttpPost] // ännu ej implementerad
         public IActionResult Settings(string email, string aspNetUserId)
         {
-            // måste fixa så att du ej kan ange en tom mailadress
             if (!ModelState.IsValid || string.IsNullOrWhiteSpace(email))
             {
                 return View(new LoggedInUserVM { AspNetId = aspNetUserId, Email = email });
@@ -139,11 +136,10 @@ namespace tvShowProject.Controllers
             _identityContext.SaveChanges();
 
             return RedirectToAction("UserPage", "Shows");
-            //return RedirectToAction(nameof(Settings));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Settings()
+        [HttpGet] // ännu ej implementerad
+        public IActionResult Settings()
         {
             var aspNetId = _userManager
                 .GetUserId(HttpContext.User);

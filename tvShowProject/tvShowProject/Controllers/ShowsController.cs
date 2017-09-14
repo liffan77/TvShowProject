@@ -11,8 +11,6 @@ using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace tvShowProject.Controllers
 {
     public class ShowsController : Controller
@@ -34,7 +32,7 @@ namespace tvShowProject.Controllers
             return View();
         }
 
-        [Authorize] //Lägg överst för att kräva en inloggad session för att komma åt sidorna.
+        [Authorize] 
         [HttpGet]
         public IActionResult UserPage()
         {
@@ -93,72 +91,21 @@ namespace tvShowProject.Controllers
                 Episodes = tvShow.EmbeddedItems.Episodes,
                 ImageUrls = tvShow.Image
             };
-            
+
             return PartialView("ShowDetails", showDetailsVm);
         }
 
-        //var viewModel = dm.GetCatViewModel(id);
-
-        //    return PartialView("CatBox", viewModel);
-
-        // funkar itne ännu
-        [HttpPost]
-        public IActionResult ShowDetails(string imdbId, int deleteMe)
-        {
-            //// hårdkodat för testning
-            //imdbId = "tt0944947";
-            //// end hårdkodat
-
-            //if (!ModelState.IsValid)
-            //    return View();
-
-            //// anropa API_handler
-            //// få datan från api-handler, skapa en ShowDetailsVM som skickas till Get
-            //ApiHandler apiHandler = new ApiHandler();
-            //string responseString = apiHandler.GetShowDetails(imdbId);
-
-            //ShowDetailsVM showDetailsVm = JsonConvert.DeserializeObject<ShowDetailsVM>(responseString);
-
-            return View();
-        }
-
-        //Tror itne denna action behövs, eftersom vi aldrig gettar search
         [HttpGet]
-        //public IActionResult Search(SearchResultItemVM[] searchResultItems)
-            public IActionResult Search(string searchString)
+        public IActionResult Search(string searchString)
         {
-
-            // visar resultatet
-            //return null;
-
             SearchResult[] searchResult = ApiHandler.SearchForShow(searchString);
 
             return PartialView("Search", searchResult);
         }
 
-
-        //[HttpPost]
-        //public IActionResult Search(UserPageVM userPageVM)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View(userPageVM);
-
-        //    SearchResult[] searchResult = ApiHandler.SearchForShow(userPageVM.SearchString);
-
-        //    return PartialView("Search", searchResult);
-        //}
-
         [HttpPost]
         public IActionResult Follow(int id, string title)
         {
-            //todo banta ner controllers, lägg logiken i tvContext
-
-            //todo visa bekräftelse
-
-            // add to DB
-            // lägg till i tvTable OM den inte finns
-            // finns id i tvTable?
-
             // fråga DB, finns detta IMDB-id redan?
             var tvTable = _tvContext.TvTable
                 .SingleOrDefault(s => s.TvMazeId == id);
@@ -208,7 +155,6 @@ namespace tvShowProject.Controllers
             return RedirectToAction(nameof(UserPage));
         }
 
-
         public int GetUserId()
         {
             // hämta id:t i aspNet
@@ -222,6 +168,5 @@ namespace tvShowProject.Controllers
                 .Id;
             return userId;
         }
-
     }
 }
