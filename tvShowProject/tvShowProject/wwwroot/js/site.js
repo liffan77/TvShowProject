@@ -50,6 +50,18 @@ function getShowDetails(id) {
     });
 }
 
+function getSearchShowDetails(id) {
+    $.ajax({
+        url: "/Shows/ShowDetails",
+        type: "GET",
+        data: { "id": id },
+        success: function (result) {
+            console.log(result);
+            $("#detailsSearchView" + id).html(result);
+        }
+    });
+}
+
 function getEpisodes(id) {
     $.ajax({
         url: "/Shows/Episodes",

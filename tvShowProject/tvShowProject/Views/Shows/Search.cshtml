@@ -1,7 +1,7 @@
 ﻿@using tvShowProject
 @model SearchResult[]
 
-<table>
+@*<table>
     @foreach (var result in Model)
     {
         <tr>
@@ -20,4 +20,45 @@
             <td colspan="2"><p>Test...</p></td>
         </tr>
     }
-</table>
+</table>*@
+
+@foreach (var result in Model)
+{
+
+
+    <div id="grandparent" class="list-group-item">
+        <div id="expander" data-toggle="collapse" data-target="@($"#grandparentSearchContent{result.Show.Id}")" data-role="expander" data-group-id="grandparent">
+            <table class="list-inline">
+                <tr onclick="getSearchShowDetails(@result.Show.Id)">
+                    <td>@result.Show.Name</td>
+                    <td></td>
+                    <td>
+                        <form asp-controller="Shows" asp-action="Follow" asp-route-id="@result.Show.Id" asp-route-title="@result.Show.Name">
+                            <input type="submit" value="Follow" />
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="collapse" id="@($"grandparentSearchContent{result.Show.Id}")" aria-expanded="true">
+            <table class="table">
+                <tbody>
+                    <tr data-toggle="collapse" data-target="@($"#childOneSearch{result.Show.Id}")">
+                        <td colspan="3">
+                            <div id="@($"detailsSearchView{result.Show.Id}")"></div>
+                        </td>
+                    </tr>
+
+                    <tr class="collapse" id="@($"childOneSearch{result.Show.Id}")">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+</div>
