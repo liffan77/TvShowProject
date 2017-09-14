@@ -11,6 +11,8 @@
 {
     <img src="@Model.ImageUrls.Medium" />
 }
+<button type="button" onclick="getShowDetails(@Model.Id)">Episodes</button>
+<div id="@($"episodeView{Model.Id}")"></div>
 
 @if (Model.Episodes != null)
 {
