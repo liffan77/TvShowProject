@@ -64,6 +64,17 @@ namespace tvShowProject.Controllers
             return View(userPageVM);
         }
 
+        [HttpGet]
+        public IActionResult Episodes(int id)
+        {
+            TvShow tvShow = ApiHandler.GetTvShowAndEpisodeDetails(id);
+            EpisodesVM episodesVM = new EpisodesVM
+            {
+                Episodes = tvShow.EmbeddedItems.Episodes
+            };
+
+            return PartialView("Episodes", episodesVM);
+        }
 
         [HttpGet]
         public IActionResult ShowDetails(int id)

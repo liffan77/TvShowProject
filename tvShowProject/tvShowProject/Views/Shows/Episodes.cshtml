@@ -1,3 +1,10 @@
 ﻿@using tvShowProject.Models.VM
 @model EpisodesVM
 
+@if (Model.Episodes != null)
+{
+    @foreach (var episode in Model.Episodes)
+    {
+        <p>@episode.Name</p>
+    }
+}

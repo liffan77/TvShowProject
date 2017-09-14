@@ -7,5 +7,7 @@ namespace tvShowProject.Models.VM
 {
     public class EpisodesVM
     {
+        //public int Id { get; set; }
+        public Episode[] Episodes { get; set; }
     }
 }

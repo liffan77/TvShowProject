@@ -49,3 +49,15 @@ function getShowDetails(id) {
         }
     });
 }
+
+function getEpisodes(id) {
+    $.ajax({
+        url: "/Shows/Episodes",
+        type: "GET",
+        data: { "id": id },
+        success: function (result) {
+            console.log(result);
+            $("#episodeView" + id).html(result);
+        }
+    });
+}

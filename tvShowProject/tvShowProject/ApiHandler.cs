@@ -334,8 +334,12 @@ namespace tvShowProject
 
             foreach (var episode in episodes)
             {
-                if (episode.Airdate.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()))
-                    releasedToday = true;
+                if (episode.Airdate.HasValue)
+                {
+
+                    if (episode.Airdate.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()))
+                        releasedToday = true;
+                }
             }
 
             return releasedToday;

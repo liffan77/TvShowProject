@@ -11,14 +11,14 @@
 {
     <img src="@Model.ImageUrls.Medium" />
 }
-<button type="button" onclick="getShowDetails(@Model.Id)">Episodes</button>
+<button type="button" onclick="getEpisodes(@Model.Id)">Episodes</button>
 <div id="@($"episodeView{Model.Id}")"></div>
 
-@if (Model.Episodes != null)
+@*@if (Model.Episodes != null)
 {
     @foreach (var episode in Model.Episodes)
     {
         <p>@episode.Name</p>
     }
-}
+}*@
 
