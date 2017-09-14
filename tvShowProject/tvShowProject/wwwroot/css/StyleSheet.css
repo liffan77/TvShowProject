@@ -1,6 +1,11 @@
 ﻿body {
     margin: 0;
 }
+#indexBG {
+    height:900px;
+    width:1266px;
+    /*background-image: url('../images/serier.jpg');*/
+}
 #myWrapper {
     width: 80%;
     margin: auto;
@@ -40,6 +45,20 @@ li {
         color: #95989A;
     }
 
+    .h1{
+        margin-top: 0;
+    }
 #genBtn {
+    background-color: #E61313;
+}
+td {
+    padding: 5px 5px 5px 5px;
+    width:100%;
+}
+
+#logInContainer {
+    height: 200px;
+    width: 50%;
+    margin:70px auto 0 auto;
     background-color: #E61313;
 }

@@ -1,39 +1,30 @@
 ﻿@using tvShowProject.Models.VM
 @model UserPageVM
 
-@*<div id="userPageNav">
-    <a href="~/accounts/Settings">Account settings</a>
-    <a href="~/accounts/Index">Log out</a>
-</div>*@
-
 <div id="userPageNav">
     <form asp-controller="Accounts" asp-action="LogOut"><input type="submit" value="Logout"/></form>
 </div>
 
 <div id="myWrapper">
     <h1>Welcome @Model.Username</h1>
-    <p>this is the user page, where the TV-show form will be displayed</p>
-    @*<form asp-controller="Shows" asp-action="Search">*@
+    
+    
     <input asp-for="SearchString" id="searchBox" />
-    @*<input type="submit" value="Search" />*@
     <button type="button" onclick="getSearchResult()">Search</button>
-    @*</form>*@
     <div id="tmp">
 
     </div>
 
 
-    @*--Ny variant, översätt till våra värden--*@
     @foreach (var item in Model.FollowedShowItems)
     {
-
-
         <div id="grandparent" class="list-group-item">
             <div id="expander" data-toggle="collapse" data-target="@($"#grandparentContent{item.Id}")" data-role="expander" data-group-id="grandparent">
                 <table class="list-inline">
                     <tr onclick="getShowDetails(@item.Id)">
-                        <td>@item.Title</td>
-                        <td>@if (item.ReleasedToday) { <p>Released</p> }</td>
+                        <td><h4>@item.Title</h4></td>
+                        <td>@if (item.ReleasedToday)
+                        { <p>Released</p> }</td>
                         <td>
                             <form asp-controller="Shows" asp-action="UnFollow" asp-route-tvMazeId="@item.Id">
                                 <input type="submit" value="Unfollow" />
