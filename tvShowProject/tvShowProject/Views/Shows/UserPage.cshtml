@@ -24,7 +24,7 @@
                     <tr onclick="getShowDetails(@item.Id)">
                         <td><h4>@item.Title</h4></td>
                         <td>@if (item.ReleasedToday)
-                        { <p>Released</p> }</td>
+                        { <p>New EP</p> }</td>
                         <td>
                             <form asp-controller="Shows" asp-action="UnFollow" asp-route-tvMazeId="@item.Id">
                                 <input type="submit" value="Unfollow" />

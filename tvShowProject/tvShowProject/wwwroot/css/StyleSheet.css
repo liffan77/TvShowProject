@@ -1,11 +1,13 @@
 ﻿body {
     margin: 0;
 }
+
 #indexBG {
-    height:900px;
-    width:1266px;
+    height: 900px;
+    width: 1266px;
     /*background-image: url('../images/serier.jpg');*/
 }
+
 #myWrapper {
     width: 80%;
     margin: auto;
@@ -26,6 +28,7 @@ ul {
     padding: 0;
     overflow: hidden;
 }
+
 li a {
     display: block;
     color: white;
@@ -33,9 +36,11 @@ li a {
     padding: 14px 16px;
     text-decoration: none;
 }
+
 li {
     float: right;
 }
+
 #userPageNav a {
     color: white;
     text-decoration: none;
@@ -45,20 +50,29 @@ li {
         color: #95989A;
     }
 
-    .h1{
-        margin-top: 0;
-    }
+.h1 {
+    margin-top: 0;
+}
+
 #genBtn {
     background-color: #E61313;
 }
+
 td {
     padding: 5px 5px 5px 5px;
-    width:100%;
+    width: 100%;
 }
 
 #logInContainer {
     height: 200px;
-    width: 50%;
-    margin:70px auto 0 auto;
+    width: 20%;
+    margin: 150px auto 0 auto;
     background-color: #E61313;
+}
+
+#logInRegBTN {
+    margin-top:110px;
+    margin-right:10px;
+    display:block;
+    float: right;
 }
