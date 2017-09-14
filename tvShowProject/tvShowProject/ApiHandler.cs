@@ -317,5 +317,30 @@ namespace tvShowProject
             Episode[] episodes = JsonConvert.DeserializeObject<Episode[]>(responseString);
             return episodes[episodes.Length - 1];
         }
+
+        public static bool CheckIfReleasedToday(int? id)
+        {
+            Episode e = ApiHandler.GetLatestEpisode(id);
+            if (e.Airdate.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()))
+                return true;
+            else
+                return false;
+        }
+
+        public static bool CheckIfAnyEpisodeReleasedToday(int? id)
+        {
+            bool releasedToday = false;
+            Episode[] episodes = ApiHandler.GetShowsEpisodes((int)id);
+
+            foreach (var episode in episodes)
+            {
+                if (episode.Airdate.Value.ToShortDateString().Equals(DateTime.Now.ToShortDateString()))
+                    releasedToday = true;
+            }
+
+            return releasedToday;
+        }
+
+
     }
 }
