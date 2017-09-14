@@ -71,7 +71,7 @@
             <div class="collapse" id="@($"grandparentContent{item.Id}")" aria-expanded="true">
                 <table class="table">
                     <tbody>
-                        <tr data-toggle="collapse" data-target="@($"#childOne{item.Id}")">
+                        <tr data-toggle="collapse" data-target="@($"#childOne{item.Id}")" onclick="getShowDetails(@item.Id)">
                             <td colspan="3">
                                 <button type="button" onclick="getShowDetails(@item.Id)">Details</button>
                                 <div id="detailsView"></div>
