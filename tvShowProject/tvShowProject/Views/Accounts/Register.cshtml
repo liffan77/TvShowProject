@@ -1,5 +1,43 @@
 ﻿@model tvShowProject.Models.VM.RegisterVM
-<h2>Register-form</h2>
+
+<a href="#" data-toggle="modal" data-target="#login-modal">Register</a>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="loginmodal-container">
+            <h1>Register new account</h1><br>
+
+            <form asp-controller="Accounts" asp-action="Register">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" />
+                <span asp-validation-for="Username"></span>
+                <br />
+                <label asp-for="Password"></label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+                @*<br />
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>*@
+                <br />
+                <input type="submit" value="Register" />
+            </form>
+
+            <div class="login-help">
+                <a href="~/accounts/register">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+@*Tidigare lösning som fungerar*@
+
+@*@model tvShowProject.Models.VM.RegisterVM
 <div id="logInContainer">
     <form asp-controller="Accounts" asp-action="Register">
         <label asp-for="Username"></label>
@@ -21,4 +59,6 @@
         {
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
-    }
+    }*@
+
+

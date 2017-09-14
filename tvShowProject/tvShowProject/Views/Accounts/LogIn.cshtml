@@ -1,21 +1,57 @@
-﻿@model tvShowProject.Models.VM.AccountLoginVM
+﻿@* tidigare LÖSNING MODIFIERAD*@
+@model tvShowProject.Models.VM.AccountLoginVM
 
-<div id="logInContainer">
+<a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="loginmodal-container">
+            <h1>Login to Your Account</h1><br>
 
-<form asp-controller="Accounts" asp-action="LogIn" asp-route-returnUrl="@Model.ReturnUrl">
-    <label asp-for="Username"></label>
-    <input asp-for="Username" />
-    <span asp-validation-for="Username"></span>
-    <br />
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password"></span>
-    <br />
-    <input id="logInRegBTN" type="submit" value="Log in" />
-</form>
+            <form asp-controller="Accounts" asp-action="LogIn" asp-route-returnUrl="@Model.ReturnUrl">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" />
+                <span asp-validation-for="Username"></span>
+                <br />
+                <label asp-for="Password"></label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"></span>
+                <br />
+                <input id="logInRegBTN" type="submit" value="Log in" />
+            </form>
+
+            <div class="login-help">
+                <a href="~/accounts/register">Register</a> 
+            </div>
+        </div>
+    </div>
 </div>
 @section Scripts
     {
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
 }
+
+@* tidigare lösning ´som funferar*@
+@*@model tvShowProject.Models.VM.AccountLoginVM
+
+    <div id="logInContainer">
+
+    <form asp-controller="Accounts" asp-action="LogIn" asp-route-returnUrl="@Model.ReturnUrl">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" />
+        <span asp-validation-for="Username"></span>
+        <br />
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+        <br />
+        <input id="logInRegBTN" type="submit" value="Log in" />
+    </form>
+    </div>
+    @section Scripts
+        {
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+    }*@
+
+

@@ -91,7 +91,7 @@ namespace tvShowProject.Controllers
             #region Skapa användaren
             await _identityContext.Database.EnsureCreatedAsync();
             IdentityUser user = new IdentityUser(model.Username);
-            user.Email = model.Email;
+            user.Email = model.Email; // sätts just nu till null i DB eftersom vi ej reggar någon mail
 
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)

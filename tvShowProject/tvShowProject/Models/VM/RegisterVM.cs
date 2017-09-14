@@ -15,8 +15,8 @@ namespace tvShowProject.Models.VM
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
-        [EmailAddress(ErrorMessage ="Please insert a correct Email-Address")]
+        //[Required]
+        //[EmailAddress(ErrorMessage ="Please insert a correct Email-Address")]
         public string Email { get; set; }
         //Kommenterar så att vi kan pusha!
     }
