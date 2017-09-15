@@ -1,6 +1,6 @@
 ﻿@model tvShowProject.Models.VM.RegisterVM
 
-<a href="#" data-toggle="modal" data-target="#login-modal">Register</a>
+@*<a href="#" data-toggle="modal" data-target="#login-modal">Register</a>*@
 <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="loginmodal-container">
@@ -14,10 +14,6 @@
                 <label asp-for="Password"></label>
                 <input asp-for="Password" />
                 <span asp-validation-for="Password"></span>
-                @*<br />
-                <label asp-for="Email"></label>
-                <input asp-for="Email" />
-                <span asp-validation-for="Email"></span>*@
                 <br />
                 <input type="submit" value="Register" />
             </form>
@@ -32,6 +28,11 @@
     {
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+                $(document).ready(function () {
+                    $('#login-modal').modal('show');
+                });
+    </script>
 }
 
 
