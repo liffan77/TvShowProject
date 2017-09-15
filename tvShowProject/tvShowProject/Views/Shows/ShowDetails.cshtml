@@ -9,7 +9,7 @@
 }
 @if (Model.ImageUrls != null)
 {
-    <img src="@Model.ImageUrls.Medium" />
+    <img style="display:block;" src="@Model.ImageUrls.Medium" />
 }
 <button type="button" onclick="getEpisodes(@Model.Id)">Episodes</button>
 <div id="@($"episodeView{Model.Id}")"></div>

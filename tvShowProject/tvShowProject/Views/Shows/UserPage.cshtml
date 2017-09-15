@@ -6,7 +6,7 @@
 </div>
 
 <div id="myWrapper">
-    <h1>Welcome @Model.Username</h1>
+    <h2>Welcome @Model.Username</h2>
     
     
     <input asp-for="SearchString" id="searchBox" />
@@ -14,6 +14,12 @@
     <div id="tmp">
 
     </div>
+
+    @if (Model.FollowedShowItems.Length < 1)
+    {
+        <h2>You have not added any shows yet!</h2>
+
+    }
 
 
     @foreach (var item in Model.FollowedShowItems)
